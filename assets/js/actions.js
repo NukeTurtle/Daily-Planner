@@ -18,7 +18,8 @@ function displayCurrentTime() {
     $("#currentDay").text(`${currentDate} ${currentTime}`);
  }
  setInterval(displayCurrentTime, 1000); // Update current time every second
-// Function to create time blocks
+
+ // Function to create time blocks
 function createTimeBlocks() {
     let currentHour = moment().hour();
     // Loop over each hour of the work day and create a time block
@@ -40,3 +41,23 @@ function createTimeBlocks() {
         $(".container").append(timeBlock);
     }
 }
+
+// Function to change color based on past present and future
+function changeColor() {
+    let currentHour = moment().hour();
+    $(".description").each(function() {
+        let blockHour = parseInt($(this).parent().find(".hour").text());
+        if(blockHour < currentHour) {
+            $(this).addClass("past");
+        }else if(blockHour === currentHour) {
+            $(this).addClass("present");
+        }else{
+            $(this).addClass("future");
+        }
+    });
+}
+
+// Call the functions
+displayCurrentTime();
+createTimeBlocks();
+changeColor();
