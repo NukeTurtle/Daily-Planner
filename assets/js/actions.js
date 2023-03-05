@@ -57,7 +57,26 @@ function changeColor() {
     });
 }
 
+// Function to save event in local storage on button click
+function saveEvent() {
+    $(".saveBtn").on("click", function() {
+        let hour = $(this).parent().find(".hour").text();
+        let event = $(this).parent().find(".description").val();
+        localStorage.setItem(hour, event);
+    });
+}
+// Function to display saved events from local storage
+function displaySavedEvents() {
+    $(".description").each(function() {
+        let hour = $(this).parent().find(".hour").text();
+        let event = localStorage.getItem(hour);
+        $(this).val(event);
+    });
+}
+
 // Call the functions
 displayCurrentTime();
 createTimeBlocks();
 changeColor();
+displaySavedEvents();
+saveEvent();
